@@ -1,0 +1,13 @@
+{
+  "PORT": 3000,
+  "API_VERSION": "/api/v1",
+  "postgres": {
+    "dialect": "postgres",
+    "host": "localhost",
+    "port": "5432",
+    "database": "postgres",
+    "username": "postgres",
+    "password": "thegame",
+    "logging": false
+  }
+}
