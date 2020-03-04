@@ -17,6 +17,8 @@ const create = async ({ body }, res) => {
 
   const { isValid, message } = service.isValidRequest(body)
 
+  console.log('***isValid: ', isValid, " message: ", message);
+
   if (!isValid) {
     const { status, json } = resolverGeneral.invalidRequest(message)
     return sendResponse(res, status, json)
@@ -26,6 +28,8 @@ const create = async ({ body }, res) => {
     isCredCardValid,
     company,
   } = service.creditCardValid(card_number)
+
+  console.log('*** isCredCardValid: ', isCredCardValid);
 
   if (!isCredCardValid) {
     console.log(isCredCardValid)
@@ -42,8 +46,6 @@ const create = async ({ body }, res) => {
   }
 
   const { status, json } = resolver.created(transactionCreated)
-
-  console.log(transactionCreated)
 
   return sendResponse(res, status, json)
 }

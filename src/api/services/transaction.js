@@ -65,6 +65,7 @@ const create = async (transaction, creditCardCompany) => {
     transactionCreated = await repository
       .create(transactionObject, payableObject)
   } catch (error) {
+    console.error('*** Error on transaction ===> ', error);
     [created, transactionCreated] = [false, {}]
     errorHandling(error)
   }

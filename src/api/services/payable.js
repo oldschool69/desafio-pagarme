@@ -25,9 +25,20 @@ const getInfoBasedOnPaymentType = (type) => {
 const addDaysToActualDate = days => moment().add(days, 'days').toDate()
 
 const getPaymentDate = (paymentType) => {
+
+  console.log('***paymentType: ', paymentType)
+
   const { days } = getInfoBasedOnPaymentType(paymentType)
 
+  if (days === undefined) {
+    throw new Error('Invalid parameter')
+  }
+
+  console.log('***days: ', days)
+
   const paymentDate = addDaysToActualDate(days)
+
+  console.log('***paymentDate: ', paymentDate)
 
   return paymentDate
 }

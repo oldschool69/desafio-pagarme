@@ -3,7 +3,8 @@ const { cors, bodyParserUrl, bodyParserJSON } = require('../config/express')
 const { transaction, balance, general } = require('../config/routes')
 const { getEnvVariable } = require('../config/config')
 
-const API_VERSION = getEnvVariable('API_VERSION')
+const API_VERSION = '/api/v1'
+console.log('***API_VERSION: ', API_VERSION);
 const app = express()
 
 app.use(cors)

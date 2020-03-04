@@ -12,23 +12,27 @@ const insertTransactionIdIntoPayable = (payable, id) => R.assoc(
 const findAll = () => Model.findAll()
 
 const create = async (transactionObject, payableObject) => {
-  const transactionCreated = await connection
-    .transaction(async () => {
-      const created = await Model
-        .create(transactionObject)
+  try {
+    const transactionCreated = await connection
+      .transaction(async () => {
+        const created = await Model
+          .create(transactionObject)
 
-      const payableWithTransactionId = insertTransactionIdIntoPayable(
-        payableObject,
-        R.prop('id')(created)
-      )
+        const payableWithTransactionId = insertTransactionIdIntoPayable(
+          payableObject,
+          R.prop('id')(created)
+        )
 
-      await Payable
-        .create(payableWithTransactionId)
+        await Payable
+          .create(payableWithTransactionId)
 
-      return created
-    })
+        return created
+      })
 
-  return transactionCreated
+    return transactionCreated
+  } catch (err) {
+    throw new Error('Error saving data: ', err)
+  }
 }
 
 const find = id => Model.findByPk(id)
